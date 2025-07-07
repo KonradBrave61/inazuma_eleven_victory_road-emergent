@@ -1,0 +1,100 @@
+import React, { useState } from 'react';
+import Button from '../../../components/ui/Button';
+import Icon from '../../../components/AppIcon';
+
+const TacticsPanel = ({ player, onTacticChange }) => {
+  const [selectedTacticIndex, setSelectedTacticIndex] = useState(null);
+  const [showTacticsList, setShowTacticsList] = useState(false);
+
+  const availableTactics = [
+    { id: 1, name: "Lightning Strike", color: "bg-yellow-500", description: "Quick offensive play with high speed" },
+    { id: 2, name: "Iron Defense", color: "bg-blue-500", description: "Solid defensive formation" },
+    { id: 3, name: "Fire Storm", color: "bg-red-500", description: "Aggressive attacking strategy" },
+    { id: 4, name: "Wind Barrier", color: "bg-green-500", description: "Balanced midfield control" },
+    { id: 5, name: "Earth Shake", color: "bg-orange-500", description: "Powerful ground-based tactics" },
+    { id: 6, name: "Ice Wall", color: "bg-cyan-500", description: "Defensive counter-attack style" }
+  ];
+
+  const handleTacticClick = (index) => {
+    setSelectedTacticIndex(index);
+    setShowTacticsList(true);
+  };
+
+  const handleTacticSelect = (tactic) => {
+    if (selectedTacticIndex !== null && onTacticChange) {
+      onTacticChange(selectedTacticIndex, tactic);
+    }
+    setShowTacticsList(false);
+    setSelectedTacticIndex(null);
+  };
+
+  return (
+    <div className="space-y-4">
+      <h3 className="text-lg font-heading-bold text-text-primary">Tactics</h3>
+      
+      <div className="grid grid-cols-1 gap-3">
+        {player.tactics.map((tactic, index) => (
+          <div
+            key={index}
+            className="p-4 rounded-lg border border-border cursor-pointer gaming-transition hover:gaming-shadow"
+            style={{ backgroundColor: `${tactic.color}20` }}
+            onClick={() => handleTacticClick(index)}
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <div 
+                  className={`w-4 h-4 rounded-full ${tactic.color}`}
+                  style={{ backgroundColor: tactic.color.replace('bg-', '').replace('-500', '') }}
+                />
+                <div>
+                  <h4 className="font-body-bold text-text-primary">{tactic.name}</h4>
+                  <p className="text-sm text-text-secondary">{tactic.description}</p>
+                </div>
+              </div>
+              <Icon name="ChevronRight" size={16} className="text-text-secondary" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Tactics Selection Modal */}
+      {showTacticsList && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-surface rounded-lg p-6 max-w-md w-full mx-4 max-h-96 overflow-y-auto">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-heading-bold text-text-primary">Select Tactic</h3>
+              <Button
+                variant="ghost"
+                className="p-2"
+                onClick={() => setShowTacticsList(false)}
+              >
+                <Icon name="X" size={20} />
+              </Button>
+            </div>
+            
+            <div className="space-y-2">
+              {availableTactics.map((tactic) => (
+                <div
+                  key={tactic.id}
+                  className="p-3 rounded-lg border border-border cursor-pointer gaming-transition hover:gaming-shadow"
+                  style={{ backgroundColor: `${tactic.color}20` }}
+                  onClick={() => handleTacticSelect(tactic)}
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-4 h-4 rounded-full ${tactic.color}`} />
+                    <div className="flex-1">
+                      <h4 className="font-body-medium text-text-primary">{tactic.name}</h4>
+                      <p className="text-xs text-text-secondary">{tactic.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default TacticsPanel;

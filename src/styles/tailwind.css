@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary Colors */
+    --color-primary: #FF6B35; /* orange-500 */
+    --color-primary-foreground: #FFFFFF; /* white */
+    
+    /* Secondary Colors */
+    --color-secondary: #4A90E2; /* blue-500 */
+    --color-secondary-foreground: #FFFFFF; /* white */
+    
+    /* Accent Colors */
+    --color-accent: #E74C3C; /* red-500 */
+    --color-accent-foreground: #FFFFFF; /* white */
+    
+    /* Background Colors */
+    --color-background: #1A1D23; /* slate-900 */
+    --color-surface: #2C3E50; /* slate-700 */
+    
+    /* Text Colors */
+    --color-text-primary: #FFFFFF; /* white */
+    --color-text-secondary: #BDC3C7; /* gray-400 */
+    
+    /* Status Colors */
+    --color-success: #27AE60; /* green-600 */
+    --color-success-foreground: #FFFFFF; /* white */
+    --color-warning: #F39C12; /* amber-500 */
+    --color-warning-foreground: #FFFFFF; /* white */
+    --color-error: #C0392B; /* red-700 */
+    --color-error-foreground: #FFFFFF; /* white */
+    
+    /* Border Colors */
+    --color-border: #374151; /* gray-700 */
+    --color-border-light: #4B5563; /* gray-600 */
+    
+    /* Muted Colors */
+    --color-muted: #374151; /* gray-700 */
+    --color-muted-foreground: #9CA3AF; /* gray-400 */
+    
+    /* Card Colors */
+    --color-card: #2C3E50; /* slate-700 */
+    --color-card-foreground: #FFFFFF; /* white */
+    
+    /* Popover Colors */
+    --color-popover: #2C3E50; /* slate-700 */
+    --color-popover-foreground: #FFFFFF; /* white */
+    
+    /* Input Colors */
+    --color-input: #374151; /* gray-700 */
+    --color-input-foreground: #FFFFFF; /* white */
+    
+    /* Ring Colors */
+    --color-ring: #FF6B35; /* orange-500 */
+    
+    /* Radius */
+    --radius: 0.5rem;
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-text-primary font-body;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
+  
+  .font-data {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .gaming-shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .gaming-shadow-lg {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .gaming-border {
+    @apply border border-border;
+  }
+  
+  .gaming-border-accent {
+    @apply border-2 border-accent;
+  }
+  
+  .gaming-transition {
+    transition: all 150ms ease-out;
+  }
+  
+  .gaming-transition-spring {
+    transition: all 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+.gaming-hover  {
+    @apply gaming-transition;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .gaming-transition,
+    .gaming-transition-spring {
+      transition: none;
+    }
+  }
+}
